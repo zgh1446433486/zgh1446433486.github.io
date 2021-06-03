@@ -1,7 +1,9 @@
 const { fs, path } = require("@vuepress/shared-utils");
+const process = require('process');
 
 module.exports = (ctx) => ({
   title: "前端知识记录",
+  dest: './dist',
   description: "Surprise! I'm back!",
   theme: "@vuepress/theme-default",
   markdown: {
