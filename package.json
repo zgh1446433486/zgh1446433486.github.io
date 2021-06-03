@@ -1,0 +1,16 @@
+{
+  "name": "hao",
+  "version": "1.0.0",
+  "description": "docs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "author": "hao",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.5.0",
+    "vuepress": "^1.5.0"
+  }
+}
