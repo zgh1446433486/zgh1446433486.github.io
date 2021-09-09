@@ -10,7 +10,7 @@ class App{
     #life;
     #pages;
     #talentSelected = new Set();
-    #totalMax=20;
+    #totalMax=20000;
     #isEnd = false;
     #selectedExtendTalent = null;
     #hintTimeout;
@@ -93,6 +93,7 @@ class App{
             .click(()=>{
                 talentPage.find('#random').hide();
                 const ul = talentPage.find('#talents');
+                console.log(this.#life.talentRandom());
                 this.#life.talentRandom()
                     .forEach(talent=>{
                         const li = createTalent(talent);
@@ -140,7 +141,7 @@ class App{
                     this.hint('请选择3个天赋');
                     return;
                 }
-                this.#totalMax = 20 + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
+                // this.#totalMax = 20 + this.#life.getTalentAllocationAddition(Array.from(this.#talentSelected).map(({id})=>id));
                 this.switch('property');
             })
 
@@ -221,10 +222,10 @@ class App{
             return {group, get, set};
         }
 
-        groups.CHR = getBtnGroups("颜值", 0, 10); // 颜值 charm CHR
-        groups.INT = getBtnGroups("智力", 0, 10); // 智力 intelligence INT
-        groups.STR = getBtnGroups("体质", 0, 10); // 体质 strength STR
-        groups.MNY = getBtnGroups("家境", 0, 10); // 家境 money MNY
+        groups.CHR = getBtnGroups("颜值", 0, 20000); // 颜值 charm CHR
+        groups.INT = getBtnGroups("智力", 0, 20000); // 智力 intelligence INT
+        groups.STR = getBtnGroups("体质", 0, 20000); // 体质 strength STR
+        groups.MNY = getBtnGroups("家境", 0, 20000); // 家境 money MNY
 
         const ul = propertyPage.find('#propertyAllocation');
 
@@ -256,28 +257,29 @@ class App{
         propertyPage
             .find('#start')
             .click(()=>{
-                if(total() < this.#totalMax) {
-                    this.hint(`你还有${this.#totalMax-total()}属性点没有分配完`);
-                    return;
-                } else if (total() > this.#totalMax) {
-                    this.hint(`你多使用了${total() - this.#totalMax}属性点`);
-                    return;
-                }
+                // if(total() < this.#totalMax) {
+                //     this.hint(`你还有${this.#totalMax-total()}属性点没有分配完`);
+                //     return;
+                // } else if (total() > this.#totalMax) {
+                //     this.hint(`你多使用了${total() - this.#totalMax}属性点`);
+                //     return;
+                // }
+                console.log(this.#talentSelected);
                 console.log(Array.from(this.#talentSelected).map(({id})=>id));
                 this.#life.restart({
-                    // CHR: groups.CHR.get(),
-                    // INT: groups.INT.get(),
-                    // STR: groups.STR.get(),
-                    // MNY: groups.MNY.get(),
-                    // SPR: 5,
-                    // TLT: Array.from(this.#talentSelected).map(({id})=>id),
+                    CHR: groups.CHR.get(),
+                    INT: groups.INT.get(),
+                    STR: groups.STR.get(),
+                    MNY: groups.MNY.get(),
+                    SPR: 5,
+                    TLT: Array.from(this.#talentSelected).map(({id})=>id),
 
-                    CHR: 10000,
-                    INT: 10000,
-                    STR: 10000,
-                    MNY: 10000,
-                    SPR: 10000,
-                    TLT: [1023,1048,1114],
+                    // CHR: 10000,
+                    // INT: 10000,
+                    // STR: 10000,
+                    // MNY: 10000,
+                    // SPR: 10000,
+                    // TLT: [1023,1048,1114],
                 });
                 this.switch('trajectory');
                 this.#pages.trajectory.born();
@@ -391,7 +393,7 @@ class App{
                 this.#life.talentExtend(this.#selectedExtendTalent);
                 this.#selectedExtendTalent = null;
                 this.#talentSelected.clear();
-                this.#totalMax = 20;
+                this.#totalMax = 20000;
                 this.#isEnd = false;
                 this.switch('index');
             });
@@ -430,7 +432,7 @@ class App{
                 clear: ()=>{
                     talentPage.find('ul.selectlist').empty();
                     talentPage.find('#random').show();
-                    this.#totalMax = 20;
+                    this.#totalMax = 20000;
                 },
             },
             property: {
