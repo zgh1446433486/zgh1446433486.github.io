@@ -5,5 +5,6 @@ export default defineConfig({
   mode: 'site',
   outputPath: 'docs/note',
   base: '/note/',
+  publicPath:'./',
   // more config: https://d.umijs.org/config
 });
